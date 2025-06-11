@@ -1,5 +1,6 @@
 import React from "react";
 import WebSearch from "@/components/web-search";
+import Translate from "@/components/translate";
 
 const models = [
 	{
@@ -142,15 +143,10 @@ export default function Home() {
 					</button>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-					<WebSearch className="md:col-span-2" />
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 ">
+					<WebSearch className="md:col-span-2 transition-all duration-300 ease-in-out" />
 
-					<div className="bg-zinc-100 dark:bg-zinc-900 rounded-xl p-6 flex flex-col">
-						<h2 className="font-medium mb-2">Exercise Minutes</h2>
-						<p className="text-zinc-500 dark:text-zinc-400 text-sm">
-							Your exercise minutes are ahead of where you normally are.
-						</p>
-					</div>
+					<Translate className="md:col-span-1 transition-height duration-300 ease-in-out" />
 				</div>
 			</div>
 		</div>

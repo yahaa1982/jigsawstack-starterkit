@@ -4,7 +4,8 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-// import Image from "next/image";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LoadingSpinner } from "./loading";
 
 interface WebSearchResult {
 	success: boolean;
@@ -28,6 +29,165 @@ interface WebSearchResult {
 	image_urls: string[];
 	links: string[];
 }
+
+// Function to safely parse HTML content
+const createMarkup = (html: string) => {
+	// Create a temporary element to decode HTML entities
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(html, "text/html");
+	return doc.body.innerHTML;
+};
+
+// Overview tab content component
+const OverviewTabContent = ({ aiOverview }: { aiOverview?: string }) => (
+	<TabsContent value="overview" className="">
+		{aiOverview ? (
+			<div className="prose dark:prose-invert max-w-none">
+				<p className="text-lg">{aiOverview}</p>
+			</div>
+		) : (
+			<div className="text-center py-8 text-zinc-500">
+				No AI overview available
+			</div>
+		)}
+	</TabsContent>
+);
+
+// Sources tab content component
+const SourcesTabContent = ({
+	results,
+}: { results: WebSearchResult["results"] }) => (
+	<TabsContent value="sources" className="">
+		{results.map((result) => (
+			<div
+				key={result.url}
+				className="bg-white dark:bg-zinc-800 p-4 rounded-lg border border-zinc-200 dark:border-zinc-700"
+			>
+				<div className="flex items-center gap-2 mb-2">
+					{result.favicon && (
+						<div className="w-4 h-4 relative">
+							<img
+								src={result.favicon}
+								alt={result.site_name}
+								width={16}
+								height={16}
+							/>
+						</div>
+					)}
+					<a
+						href={result.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-blue-600 hover:underline font-medium"
+					>
+						{result.title}
+					</a>
+				</div>
+				<p className="text-xs text-zinc-500 mb-2">{result.url}</p>
+				<div
+					className="text-sm mb-2"
+					dangerouslySetInnerHTML={{
+						__html: createMarkup(result.description),
+					}}
+				/>
+			</div>
+		))}
+	</TabsContent>
+);
+
+// Images tab content component
+const ImagesTabContent = ({ imageUrls }: { imageUrls: string[] }) => (
+	<TabsContent value="images">
+		<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+			{imageUrls.length > 0 ? (
+				imageUrls.map((url) => (
+					<div
+						key={url}
+						className="aspect-square relative rounded-md overflow-hidden"
+					>
+						<img src={url} alt="" className="w-full h-full object-cover" />
+					</div>
+				))
+			) : (
+				<div className="col-span-full text-center py-8 text-zinc-500">
+					No images available
+				</div>
+			)}
+		</div>
+	</TabsContent>
+);
+
+// Tab triggers component
+const SearchTabTriggers = ({ results }: { results: WebSearchResult }) => (
+	<TabsList className="grid w-full grid-cols-3">
+		<TabsTrigger value="overview" className="flex items-center gap-2">
+			Overview
+		</TabsTrigger>
+		<TabsTrigger value="sources" className="flex items-center gap-2">
+			<svg
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+				role="img"
+			>
+				<path
+					d="M12 6v6l4 2"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+			</svg>
+			Sources
+			{results.results.length > 0 && (
+				<span className="ml-1 text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded-full">
+					{results.results.length}
+				</span>
+			)}
+		</TabsTrigger>
+		<TabsTrigger value="images" className="flex items-center gap-2">
+			<svg
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+				role="img"
+			>
+				<rect
+					x="3"
+					y="3"
+					width="18"
+					height="18"
+					rx="2"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+				<path
+					d="M21 15l-5-5L5 21"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</svg>
+			Images
+			{results.image_urls.length > 0 && (
+				<span className="ml-1 text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded-full">
+					{results.image_urls.length}
+				</span>
+			)}
+		</TabsTrigger>
+	</TabsList>
+);
 
 export default function WebSearch({ className }: { className?: string }) {
 	const [query, setQuery] = useState("What is the capital of France?");
@@ -56,95 +216,46 @@ export default function WebSearch({ className }: { className?: string }) {
 	return (
 		<div
 			className={cn(
-				"bg-zinc-100 dark:bg-zinc-900 rounded-xl p-6 flex flex-col",
+				"bg-zinc-100 dark:bg-zinc-900 rounded-xl p-6 flex flex-col gap-2",
 				className,
 			)}
 		>
-			<h2 className="font-medium mb-2">Web Search</h2>
-			<p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
-				Search the web for information.
-			</p>
-			<div className="flex w-full max-w-sm items-center gap-2 mb-4">
-				<Input
-					type="text"
-					placeholder="What is the capital of France?"
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
-					onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-				/>
-				<Button
-					type="submit"
-					variant="outline"
-					onClick={handleSearch}
-					disabled={loading}
-				>
-					{loading ? "Searching..." : "Search"}
-				</Button>
+			<div className="flex justify-between">
+				<div className="flex flex-col">
+					<h2 className="font-bold">Web Search</h2>
+					<p className="text-zinc-500 dark:text-zinc-400 text-sm">
+						Search the web for information.
+					</p>
+				</div>
+				<div className="flex w-full max-w-sm items-center gap-2">
+					<Input
+						type="text"
+						placeholder="What is the capital of France?"
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+						className="text-md"
+					/>
+					<Button
+						type="submit"
+						variant="outline"
+						onClick={handleSearch}
+						disabled={loading}
+					>
+						{loading ? "Searching..." : "Search"}
+					</Button>
+				</div>
 			</div>
 
-			{loading && (
-				<div className="flex flex-col items-center py-8">
-					<div className="animate-spin h-8 w-8 border-4 border-blue-500 rounded-full border-t-transparent" />
-					<p className="mt-4 text-sm text-zinc-500">Searching the web...</p>
-				</div>
-			)}
+			{loading && <LoadingSpinner />}
 
 			{results && !loading && (
-				<div className="mt-4 space-y-6">
-					<div className="space-y-4">
-						<h3 className="font-medium">Sources</h3>
-						{results.results.map((result) => (
-							<div
-								key={result.url}
-								className="bg-white dark:bg-zinc-800 p-4 rounded-lg border border-zinc-200 dark:border-zinc-700"
-							>
-								<div className="flex items-center gap-2 mb-2">
-									{result.favicon && (
-										<div className="w-4 h-4 relative">
-											<img
-												src={result.favicon}
-												alt={result.site_name}
-												width={16}
-												height={16}
-											/>
-										</div>
-									)}
-									<a
-										href={result.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-blue-600 hover:underline font-medium"
-									>
-										{result.title}
-									</a>
-								</div>
-								<p className="text-xs text-zinc-500 mb-2">{result.url}</p>
-								<p className="text-sm mb-2">{result.description}</p>
-								{result.snippets && result.snippets.length > 0 && (
-									<div className="bg-zinc-50 dark:bg-zinc-900 p-2 rounded text-sm">
-										{result.snippets[0]}
-									</div>
-								)}
-							</div>
-						))}
-					</div>
-
-					{results.image_urls.length > 0 && (
-						<div className="space-y-2">
-							<h3 className="font-medium">Images</h3>
-							<div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-								{results.image_urls.slice(0, 6).map((url) => (
-									<div
-										key={url}
-										className="aspect-square relative rounded-md overflow-hidden"
-									>
-										<img src={url} alt="" className="object-cover" />
-									</div>
-								))}
-							</div>
-						</div>
-					)}
-				</div>
+				<Tabs defaultValue="overview" className="">
+					<SearchTabTriggers results={results} />
+					<OverviewTabContent aiOverview={results.ai_overview} />
+					<SourcesTabContent results={results.results} />
+					<ImagesTabContent imageUrls={results.image_urls} />
+				</Tabs>
 			)}
 		</div>
 	);
