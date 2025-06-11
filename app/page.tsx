@@ -1,4 +1,73 @@
 import React from "react";
+import WebSearch from "@/components/web-search";
+
+const models = [
+	{
+		name: "AI Web Scraper",
+		description: "Scrape websites with AI.",
+		link: "https://jigsawstack.com/ai-web-scraper",
+	},
+	{
+		name: "AI Image Generation",
+		description: "Generate images with AI.",
+		link: "https://jigsawstack.com/ai-image-generation",
+	},
+	{
+		name: "AI Prediction",
+		description: "Make predictions with AI.",
+		link: "https://jigsawstack.com/ai-prediction",
+	},
+	{
+		name: "AI Search",
+		description: "Search content with AI.",
+		link: "https://jigsawstack.com/ai-search",
+	},
+	{
+		name: "AI Sentiment",
+		description: "Analyze sentiment with AI.",
+		link: "https://jigsawstack.com/ai-sentiment",
+	},
+	{
+		name: "AI Summary",
+		description: "Summarize content with AI.",
+		link: "https://jigsawstack.com/ai-summary",
+	},
+	{
+		name: "Embedding",
+		description: "Create text embeddings.",
+		link: "https://jigsawstack.com/embedding",
+	},
+	{
+		name: "NSFW Detection",
+		description: "Detect NSFW content.",
+		link: "https://jigsawstack.com/nsfw-detection",
+	},
+	{
+		name: "Prompt Engine",
+		description: "Engine for AI prompts.",
+		link: "https://jigsawstack.com/prompt-engine",
+	},
+	{
+		name: "Speech to Text",
+		description: "Convert speech to text.",
+		link: "https://jigsawstack.com/speech-to-text",
+	},
+	{
+		name: "Text to Speech",
+		description: "Convert text to speech.",
+		link: "https://jigsawstack.com/text-to-speech",
+	},
+	{
+		name: "Translation",
+		description: "Translate text with AI.",
+		link: "https://jigsawstack.com/translation",
+	},
+	{
+		name: "VOCR",
+		description: "Visual OCR technology.",
+		link: "https://jigsawstack.com/vocr",
+	},
+];
 
 export default function Home() {
 	return (
@@ -8,7 +77,7 @@ export default function Home() {
 					<div className="bg-zinc-100 dark:bg-zinc-900 px-4 py-2 rounded-full inline-flex items-center">
 						<span className="text-sm">JigsawStack</span>
 					</div>
-					<h1 className="text-5xl font-bold">JigsawStack SDK Template</h1>
+					<h1 className="text-5xl font-bold">JigsawStack NextJS Template</h1>
 					<p className="text-zinc-500 dark:text-zinc-400 max-w-2xl">
 						Try our hand-picked small custom models. Available for free.
 					</p>
@@ -74,63 +143,14 @@ export default function Home() {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-					<div className="bg-zinc-100 dark:bg-zinc-900 rounded-xl p-6 flex flex-col">
-						<h2 className="font-medium mb-2">Move Goal</h2>
-						<p className="text-zinc-500 dark:text-zinc-400 text-sm">
-							Set your daily activity goal.
-						</p>
-
-						<div className="flex items-center justify-center flex-grow">
-							<div className="flex flex-col items-center mt-8">
-								<div className="text-7xl font-semibold mb-1">350</div>
-								<div className="text-zinc-500 text-xs uppercase">
-									calories/day
-								</div>
-
-								<div className="flex items-center gap-4 mt-6">
-									<button
-										type="button"
-										className="bg-zinc-800 rounded-full w-8 h-8 flex items-center justify-center"
-									>
-										<span>-</span>
-									</button>
-									<button
-										type="button"
-										className="bg-zinc-800 rounded-full w-8 h-8 flex items-center justify-center"
-									>
-										<span>+</span>
-									</button>
-								</div>
-							</div>
-						</div>
-
-						<button
-							type="button"
-							className="bg-zinc-800 text-white rounded-md py-2 mt-4 hover:bg-zinc-700"
-						>
-							Set Goal
-						</button>
-					</div>
+					<WebSearch className="md:col-span-2" />
 
 					<div className="bg-zinc-100 dark:bg-zinc-900 rounded-xl p-6 flex flex-col">
 						<h2 className="font-medium mb-2">Exercise Minutes</h2>
 						<p className="text-zinc-500 dark:text-zinc-400 text-sm">
 							Your exercise minutes are ahead of where you normally are.
 						</p>
-
-						<div className="flex-grow">
-							{/* This area would typically have a chart */}
-						</div>
 					</div>
-				</div>
-
-				<div className="mt-10 text-center">
-					<button
-						type="button"
-						className="bg-zinc-800 px-5 py-2 rounded-lg text-sm"
-					>
-						Copy Code
-					</button>
 				</div>
 			</div>
 		</div>
