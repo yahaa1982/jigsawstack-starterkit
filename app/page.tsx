@@ -1,6 +1,7 @@
 import React from "react";
 import WebSearch from "@/components/web-search";
 import Translate from "@/components/translate";
+import TextToSpeech from "@/components/text-to-speech";
 
 const models = [
 	{
@@ -147,6 +148,8 @@ export default function Home() {
 					<WebSearch className="md:col-span-2 transition-all duration-300 ease-in-out" />
 
 					<Translate className="md:col-span-1 transition-height duration-300 ease-in-out" />
+
+					<TextToSpeech className="md:col-span-1 transition-height duration-300 ease-in-out" />
 				</div>
 			</div>
 		</div>
