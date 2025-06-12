@@ -5,7 +5,7 @@ export async function POST(request: Request) {
 	try {
 		// Parse the request body
 		const body = await request.json();
-		const { url } = body;
+		const { url, element_prompts } = body;
 
 		// Validate the required parameters
 		if (!url || typeof url !== "string") {
@@ -16,8 +16,9 @@ export async function POST(request: Request) {
 		}
 
 		// Make the scrape request to JigsawStack
-		const response = await jigsawStackClient.web.scrape({
+		const response = await jigsawStackClient.web.ai_scrape({
 			url,
+			element_prompts,
 		});
 
 		// Return the scrape results
