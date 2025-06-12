@@ -6,6 +6,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LoadingSpinner } from "./loading";
+import ReactMarkdown from "react-markdown";
 
 interface WebSearchResult {
 	success: boolean;
@@ -43,7 +44,7 @@ const OverviewTabContent = ({ aiOverview }: { aiOverview?: string }) => (
 	<TabsContent value="overview" className="">
 		{aiOverview ? (
 			<div className="prose dark:prose-invert max-w-none">
-				<p className="text-lg">{aiOverview}</p>
+				<ReactMarkdown>{aiOverview}</ReactMarkdown>
 			</div>
 		) : (
 			<div className="text-center py-8 text-zinc-500">

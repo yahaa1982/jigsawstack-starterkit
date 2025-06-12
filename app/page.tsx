@@ -1,4 +1,5 @@
 import React from "react";
+import ImageGenerator from "@/components/image-gen";
 import WebSearch from "@/components/web-search";
 import Translate from "@/components/translate";
 import TextToSpeech from "@/components/text-to-speech";
@@ -150,6 +151,8 @@ export default function Home() {
 					<Translate className="md:col-span-1 transition-height duration-300 ease-in-out" />
 
 					<TextToSpeech className="md:col-span-1 transition-height duration-300 ease-in-out" />
+
+					<ImageGenerator className="md:col-span-1 transition-height duration-300 ease-in-out" />
 				</div>
 			</div>
 		</div>

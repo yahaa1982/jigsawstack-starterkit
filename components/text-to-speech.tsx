@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,12 +13,6 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { Play, Pause, Volume2 } from "lucide-react";
-
-interface TextToSpeechResult {
-	audio_url?: string;
-	audio_data?: string; // base64 encoded audio data
-	// Add other properties based on JigsawStack response
-}
 
 // Custom Audio Player Component
 function AudioPlayer({ audioUrl }: { audioUrl: string }) {
@@ -79,7 +74,9 @@ function AudioPlayer({ audioUrl }: { audioUrl: string }) {
 
 	return (
 		<div className="bg-white dark:bg-zinc-800 rounded-lg border p-4">
-			<audio ref={audioRef} src={audioUrl} preload="metadata" />
+			<audio ref={audioRef} src={audioUrl} preload="metadata">
+				<track kind="captions" src="" label="captions" />
+			</audio>
 
 			<div className="flex items-center gap-3">
 				{/* Play/Pause Button */}
@@ -101,16 +98,11 @@ function AudioPlayer({ audioUrl }: { audioUrl: string }) {
 					{formatTime(currentTime)} / {formatTime(duration)}
 				</span>
 
-				{/* Progress Bar */}
-				<div
-					className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full cursor-pointer relative"
+				<Progress
+					value={progressPercentage}
+					className="flex-1 cursor-pointer bg-zinc-200 dark:bg-zinc-700"
 					onClick={handleSeek}
-				>
-					<div
-						className="h-full bg-blue-500 rounded-full transition-all duration-100"
-						style={{ width: `${progressPercentage}%` }}
-					/>
-				</div>
+				/>
 
 				{/* Volume Icon */}
 				<Volume2 className="h-4 w-4 text-zinc-500" />
@@ -180,14 +172,11 @@ const voices = [
 export default function TextToSpeech({ className }: { className?: string }) {
 	const [text, setText] = useState("Hello, world!");
 	const [selectedVoice, setSelectedVoice] = useState("en-US-female-27");
-	const [results, setResults] = useState<TextToSpeechResult | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
 	const handleTextToSpeech = async () => {
 		if (!text.trim() || !selectedVoice) return;
-		console.log("TEXT", text);
-		console.log("SELECTED VOICE", selectedVoice);
 
 		try {
 			setLoading(true);
@@ -202,7 +191,6 @@ export default function TextToSpeech({ className }: { className?: string }) {
 				}),
 			});
 			const data = await response.json();
-			setResults(data);
 
 			// Handle audio data - create blob URL for playback
 			if (data.audio_data) {
