@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 interface ScrapeResponse {
 	page_position?: number;
 	page_position_length?: number;
-	context?: Record<string, any>;
+	context?: Record<string, string[]>;
 	error?: string;
 }
 
@@ -65,8 +65,8 @@ export default function AIScrape({ className }: { className?: string }) {
 				<h3 className="font-medium text-md mb-2">{key}:</h3>
 				{Array.isArray(value) ? (
 					<ul className="list-disc pl-5 space-y-1">
-						{value.map((item, index) => (
-							<li key={index}>{item}</li>
+						{value.map((item) => (
+							<li key={item}>{item}</li>
 						))}
 					</ul>
 				) : (
@@ -132,7 +132,7 @@ export default function AIScrape({ className }: { className?: string }) {
 			</form>
 
 			{results && !loading && (
-				<div className="mt-4 p-4 bg-white dark:bg-zinc-800 rounded-lg border overflow-auto max-h-[400px]">
+				<div className="p-4 bg-white dark:bg-zinc-800 rounded-lg border overflow-auto max-h-[400px]">
 					{results.error ? (
 						<p className="text-red-500">{results.error}</p>
 					) : (

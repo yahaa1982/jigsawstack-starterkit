@@ -87,7 +87,7 @@ export default function ImageGenerator({ className }: { className?: string }) {
 			)}
 
 			{imageData && !loading && (
-				<div className="mt-4">
+				<div className="">
 					<div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
 						<img
 							src={`data:image/png;base64,${imageData}`}

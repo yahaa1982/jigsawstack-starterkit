@@ -296,10 +296,7 @@ export default function TextToSpeech({ className }: { className?: string }) {
 			</form>
 
 			{audioUrl && !loading && (
-				<div className="mt-4">
-					<p className="text-zinc-900 dark:text-zinc-100 font-medium mb-3">
-						Audio generated successfully!
-					</p>
+				<div className="">
 					<AudioPlayer audioUrl={audioUrl} />
 				</div>
 			)}

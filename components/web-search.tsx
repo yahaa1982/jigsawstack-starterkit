@@ -31,14 +31,6 @@ interface WebSearchResult {
 	links: string[];
 }
 
-// Function to safely parse HTML content
-const createMarkup = (html: string) => {
-	// Create a temporary element to decode HTML entities
-	const parser = new DOMParser();
-	const doc = parser.parseFromString(html, "text/html");
-	return doc.body.innerHTML;
-};
-
 // Overview tab content component
 const OverviewTabContent = ({ aiOverview }: { aiOverview?: string }) => (
 	<TabsContent value="overview" className="">
@@ -85,12 +77,7 @@ const SourcesTabContent = ({
 					</a>
 				</div>
 				<p className="text-xs text-zinc-500 mb-2">{result.url}</p>
-				<div
-					className="text-sm mb-2"
-					dangerouslySetInnerHTML={{
-						__html: createMarkup(result.description),
-					}}
-				/>
+				<ReactMarkdown>{result.description}</ReactMarkdown>
 			</div>
 		))}
 	</TabsContent>
@@ -251,7 +238,7 @@ export default function WebSearch({ className }: { className?: string }) {
 			{loading && <LoadingSpinner />}
 
 			{results && !loading && (
-				<Tabs defaultValue="overview" className="">
+				<Tabs defaultValue="overview" className="overflow-auto">
 					<SearchTabTriggers results={results} />
 					<OverviewTabContent aiOverview={results.ai_overview} />
 					<SourcesTabContent results={results.results} />

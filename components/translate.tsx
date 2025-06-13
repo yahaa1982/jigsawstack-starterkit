@@ -131,7 +131,7 @@ export default function Translate({ className }: { className?: string }) {
 			</form>
 
 			{results && !loading && (
-				<div className="mt-4 p-4 bg-white dark:bg-zinc-800 rounded-lg border">
+				<div className="p-4 bg-white dark:bg-zinc-800 rounded-lg border">
 					<p className="text-zinc-900 dark:text-zinc-100 font-medium">
 						{results.translated_text}
 					</p>
