@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<a href="https://github.com/jigsawstack/nextjs-template">
+  <h1 align="center">JigsawStack Next.js Template</h1>
+</a>
 
-## Getting Started
+<p align="center">
+  An open-source AI-powered starter kit built with Next.js, Tailwind CSS, and JigsawStack AI APIs.
+</p>
 
-First, run the development server:
+<p align="center">
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
+  <a href="#running-locally"><strong>Running Locally</strong></a> ·
+  <a href="#available-ai-apis"><strong>Available AI APIs</strong></a>
+</p>
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Ready-to-use AI API integrations powered by [JigsawStack](https://jigsawstack.com), including image generation, text-to-speech, speech-to-text, translation, OCR, and web search.
+- Modern UI components using [shadcn/ui](https://ui.shadcn.com/) with [Tailwind CSS](https://tailwindcss.com).
+- Built with the latest [Next.js 15](https://nextjs.org) App Router and React 19.
+- Turbopack for faster development experience.
+- Dark mode support via next-themes.
+- TypeScript for type safety.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy Your Own
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can deploy your own version to Vercel by clicking the button below:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjigsawstack%2Fnextjs-template&project-name=jigsawstack-nextjs-app&repository-name=jigsawstack-nextjs-app)
+
+## Running Locally
+
+1. Clone the repository and install dependencies:
+
+   ```bash
+   git clone https://github.com/jigsawstack/nextjs-template.git
+   cd nextjs-template
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+2. Create a `.env.local` file in the root directory and add your JigsawStack API key:
+
+   ```
+   JIGSAWSTACK_API_KEY=your_api_key_here
+   ```
+
+   You can get your API key by signing up at [JigsawStack](https://jigsawstack.com).
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view your application.
+
+## Available AI APIs
+
+This template includes ready-to-use API routes for the following JigsawStack AI services:
+
+- **Image Generation** - Create AI-generated images from text prompts
+- **Text-to-Speech (TTS)** - Convert text to natural-sounding speech
+- **Speech-to-Text** - Transcribe audio to text
+- **Translation** - Translate text between languages
+- **Visual OCR** - Extract text from images
+- **AI Web Scraping** - Extract structured data from websites
+- **Web Search** - Perform AI-powered web searches
+
+Each API is pre-configured in the `app/api/jigsawstack` directory and ready to use in your Next.js application.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this template:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [JigsawStack Documentation](https://docs.jigsawstack.com) - learn about JigsawStack AI APIs
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
+- [Tailwind CSS](https://tailwindcss.com/docs) - utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com) - beautifully designed components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
