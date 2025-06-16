@@ -21,7 +21,7 @@ export default function Nav() {
       </a>
 
       <ModeToggle />
-      <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJigsawStack%2Fjigsawstack-starterkit&env=NEXT_PUBLIC_JIGSAWSTACK_PUBLIC_KEY">
+      <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJigsawStack%2Fjigsawstack-starterkit&env=JIGSAWSTACK_API_KEY&envDescription=Your%20personal%20JigsawStack%20API%20key%20%E2%80%94%20required%20to%20authenticate%20and%20access%20AI%20features%20with%20our%20small%20custom%20models.&envLink=https%3A%2F%2Fjigsawstack.com%2Fdocs%2Fintroduction&project-name=jigsawstack-starterkit&repository-name=jigsawstack-starterkit">
         <img src="https://vercel.com/button" alt="Deploy with Vercel" />
       </a>
     </nav>
