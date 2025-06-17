@@ -109,7 +109,6 @@ export default function AIScrape({ className }: { className?: string }) {
             onChange={(e) => setElementPrompts(e.target.value)}
             className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           />
-          <p className="text-xs text-zinc-500">Enter each prompt on a new line (e.g. &quot;titles&quot;, &quot;points&quot;)</p>
         </div>
 
         <Button type="submit" disabled={loading || !url.trim() || !elementPrompts.trim()} className="w-full">
@@ -118,7 +117,7 @@ export default function AIScrape({ className }: { className?: string }) {
       </form>
 
       {results && !loading && (
-        <div className="p-4 bg-white dark:bg-zinc-800 rounded-lg border overflow-auto max-h-[400px]">
+        <div className="p-4 bg-white dark:bg-zinc-800 rounded-lg border">
           {results.error ? (
             <p className="text-red-500">{results.error}</p>
           ) : (

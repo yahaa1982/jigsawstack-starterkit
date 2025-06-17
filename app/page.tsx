@@ -41,7 +41,7 @@ export default function Home() {
 
           <ImageGenerator className="md:col-span-1 transition-height duration-300 ease-in-out max-h-[400px] overflow-auto" />
 
-          <AIScrape className="md:col-span-1 transition-height duration-300 ease-in-out max-h-[400px] overflow-auto" />
+          <AIScrape className="md:col-span-1 transition-height duration-300 max-h-[400px] ease-in-out overflow-auto" />
         </div>
       </div>
     </div>
