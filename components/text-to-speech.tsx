@@ -69,7 +69,7 @@ function AudioPlayer({ audioUrl }: { audioUrl: string }) {
   return (
     <div className="bg-white dark:bg-zinc-800 rounded-lg border p-4">
       <audio ref={audioRef} src={audioUrl} preload="metadata">
-        <track kind="captions" src="" label="captions" />
+        <track kind="captions" src="#" label="captions" />
       </audio>
 
       <div className="flex items-center gap-3">

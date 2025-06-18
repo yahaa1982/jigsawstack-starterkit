@@ -87,14 +87,15 @@ const ImagesTabContent = ({ imageUrls }: { imageUrls: string[] }) => (
 const SearchTabTriggers = ({ results }: { results: WebSearchResult }) => (
   <TabsList className="grid w-full grid-cols-3">
     <TabsTrigger value="overview" className="flex items-center gap-2">
-      Overview
+      <span className="hidden sm:inline">Overview</span>
+      <span className="sm:hidden">AI</span>
     </TabsTrigger>
     <TabsTrigger value="sources" className="flex items-center gap-2">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+      <svg className="inline" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
         <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
       </svg>
-      Sources
+      <span className="hidden sm:inline">Sources</span>
       {results.results.length > 0 && (
         <span className="ml-1 text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded-full">{results.results.length}</span>
       )}
@@ -105,7 +106,7 @@ const SearchTabTriggers = ({ results }: { results: WebSearchResult }) => (
         <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
         <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-      Images
+      <span className="hidden sm:inline">Images</span>
       {results.image_urls.length > 0 && (
         <span className="ml-1 text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded-full">{results.image_urls.length}</span>
       )}
@@ -138,22 +139,22 @@ export default function WebSearch({ className }: { className?: string }) {
   };
 
   return (
-    <div className={cn("bg-zinc-100 dark:bg-zinc-900 rounded-xl p-6 flex flex-col gap-2", className)}>
-      <div className="flex justify-between">
+    <div className={cn("bg-zinc-100 dark:bg-zinc-900 rounded-xl p-4 sm:p-6 flex flex-col gap-2", className)}>
+      <div className="flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2">
         <div className="flex flex-col">
           <h2 className="font-bold">Web Search</h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-sm">Search the web for information.</p>
         </div>
-        <div className="flex w-full max-w-sm items-center gap-2">
+        <div className="flex flex-col sm:flex-row w-full sm:max-w-sm items-center gap-2">
           <Input
             type="text"
             placeholder="What is the capital of France?"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            className="text-md"
+            className="text-md w-full"
           />
-          <Button type="submit" variant="outline" onClick={handleSearch} disabled={loading}>
+          <Button type="submit" onClick={handleSearch} disabled={loading} className="w-full sm:w-auto">
             {loading ? "Searching..." : "Search"}
           </Button>
         </div>

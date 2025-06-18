@@ -20,9 +20,6 @@ export default function Home() {
       />
       <div className="space-y-8 w-full max-w-6xl">
         <div className="flex flex-col items-center justify-center text-center space-y-4">
-          <div className="bg-zinc-100 dark:bg-zinc-900 px-4 py-2 rounded-full inline-flex items-center">
-            <span className="text-sm">Vercel x JigsawStack</span>
-          </div>
           <h1 className="text-5xl font-bold">JigsawStack NextJS Template</h1>
           <p className="text-zinc-500 dark:text-zinc-400 max-w-2xl">Try our hand-picked small custom models. Available for free.</p>
           <div className="flex gap-4 mt-4">
