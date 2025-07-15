@@ -48,7 +48,7 @@ You can deploy your own version to Vercel by clicking the button below:
 2. Create a `.env.local` file in the root directory and add your JigsawStack API key:
 
    ```
-   JIGSAWSTACK_API_KEY=your_api_key_here
+   JIGSAWSTACK_API_KEY=sk_e4f070fdb8c177fb3187c54701a53dd0af58ad99646ff5dcb627064e7410401a49cc2a635a3d0215206a439db5e774d4d4eb1fec164ed60951efac2df3b46eeb024McW0dvHWOvORdShZLK
    ```
 
    You can get your API key by signing up at [JigsawStack](https://jigsawstack.com).
